@@ -2,8 +2,9 @@ import logo1 from "../assets/sf_logo1.svg";
 import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router";
 
-function Navbar() {
+const Navbar = () => {
   return (
     <>
       <nav id="navigation-bar">
@@ -14,14 +15,24 @@ function Navbar() {
           </section>
           <section id="page-links">
             <ul>
-              <li>Home</li>
-              <li>Shop</li>
               <li>
-                Cart <FontAwesomeIcon icon={faBagShopping} />
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
               </li>
-              <div id="qty-bubble">
-                <p id="qty">10</p>
-              </div>
+              <li>
+                <Link to="shop" className="nav-link">
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link to="cart" className="nav-link">
+                  Cart <FontAwesomeIcon icon={faBagShopping} />
+                  <div id="qty-bubble">
+                    <p id="qty">10</p>
+                  </div>
+                </Link>
+              </li>
             </ul>
           </section>
         </div>
@@ -29,6 +40,6 @@ function Navbar() {
       </nav>
     </>
   );
-}
+};
 
 export default Navbar;

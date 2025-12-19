@@ -1,12 +1,14 @@
 import "./App.css";
-import Home from "./Homepage/Home";
+import { Outlet } from "react-router";
+import Navbar from "./Navbar/Navbar";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Home />
+      <Navbar />
+      <Outlet />
     </>
   );
-}
+};
 
 export default App;

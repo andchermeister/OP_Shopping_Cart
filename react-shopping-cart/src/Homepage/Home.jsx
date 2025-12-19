@@ -4,12 +4,10 @@ import leclerc from "../assets/charles_leclerc.avif";
 import hamilton from "../assets/lewis_hamilton.avif";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-//<FontAwesomeIcon icon="fa-solid fa-arrow-right" />
 
-function Home() {
+const Home = () => {
   return (
     <>
-      <Navbar />
       <section id="home">
         <section id="hero">
           <h1 id="hero-text">
@@ -46,6 +44,6 @@ function Home() {
       </section>
     </>
   );
-}
+};
 
 export default Home;
