@@ -1,0 +1,23 @@
+src
+    components
+        navbar
+            navbar.jsx
+            navbar.test
+            navbar.css
+        home
+            home.jsx
+            home.test
+            home.css
+        shop
+            shop.jsx
+            shop.test
+            shop.css
+        cart
+            cart.jsx
+            cart.test
+            cart.css
+        
+
+fonts: Abhaya Libre SemiBold
+ferrari-store link: https://store.ferrari.com/en-it/replica/replica-scuderia-ferrari/t-shirts/
+icons: hugeicons.com
