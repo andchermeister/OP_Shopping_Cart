@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
 
 #navigation-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
   font-family: "Abhaya Libre", serif;
 }
 
@@ -41,6 +45,7 @@ li {
 }
 
 #qty-bubble {
+  opacity: 0;
   position: absolute;
   top: 30px;
   right: 25px;
@@ -52,6 +57,10 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#qty-bubble.visible {
+  opacity: 1;
 }
 
 .nav-link {

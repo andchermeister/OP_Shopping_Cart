@@ -20,6 +20,9 @@ i {
 }
 
 #gearup-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 227px;
   height: 64px;
   background-image: linear-gradient(to right, black, #ff2800);
@@ -28,6 +31,7 @@ i {
   border-radius: 8px;
   font-family: "Abhaya Libre", serif;
   font-size: 30px;
+  text-decoration: none;
 }
 
 #drivers {
@@ -52,13 +56,12 @@ i {
 }
 
 .arrow-btn {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 25px;
 }
 
 .div-flex {

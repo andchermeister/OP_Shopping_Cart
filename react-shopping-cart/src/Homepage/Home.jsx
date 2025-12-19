@@ -1,9 +1,9 @@
-import Navbar from "../Navbar/Navbar";
 import "./Home.css";
 import leclerc from "../assets/charles_leclerc.avif";
 import hamilton from "../assets/lewis_hamilton.avif";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router";
 
 const Home = () => {
   return (
@@ -13,7 +13,9 @@ const Home = () => {
           <h1 id="hero-text">
             Feel the <i>speed</i>. Wear the <i>legacy</i>.
           </h1>
-          <button id="gearup-btn">Gear up now</button>
+          <Link to="shop" id="gearup-btn">
+            Gear up now
+          </Link>
         </section>
         <section id="drivers">
           <div id="charles-leclerc-section">
@@ -23,9 +25,9 @@ const Home = () => {
                 <p className="driver-text">Charles Leclerc</p>
                 <p className="driver-text">collection</p>
               </div>
-              <button className="arrow-btn">
+              <Link to="shop" className="arrow-btn">
                 <FontAwesomeIcon icon={faArrowRight} />
-              </button>
+              </Link>
             </div>
           </div>
           <div id="lewis-hamilton-section">
@@ -35,9 +37,9 @@ const Home = () => {
                 <p className="driver-text">Lewis Hamilton</p>
                 <p className="driver-text">collection</p>
               </div>
-              <button className="arrow-btn">
+              <Link to="shop" className="arrow-btn">
                 <FontAwesomeIcon icon={faArrowRight} />
-              </button>
+              </Link>
             </div>
           </div>
         </section>

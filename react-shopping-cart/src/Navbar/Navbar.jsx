@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
 
-const Navbar = () => {
+const Navbar = ({ basketCounter }) => {
   return (
     <>
       <nav id="navigation-bar">
         <div id="flex-div">
           <section id="logo-section">
-            <img src={logo1} alt="ferrari-horse-logo" id="logo1" />
+            <img src={logo1} alt="ferrari-horse-logo1" id="logo1" />
             <h1>Scuderia Ferrari</h1>
           </section>
           <section id="page-links">
@@ -28,8 +28,11 @@ const Navbar = () => {
               <li>
                 <Link to="cart" className="nav-link">
                   Cart <FontAwesomeIcon icon={faBagShopping} />
-                  <div id="qty-bubble">
-                    <p id="qty">10</p>
+                  <div
+                    id="qty-bubble"
+                    className={basketCounter > 0 ? "visible" : ""}
+                  >
+                    <p id="qty">{basketCounter}</p>
                   </div>
                 </Link>
               </li>

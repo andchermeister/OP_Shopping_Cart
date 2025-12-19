@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Noto+Music&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+#shop-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Noto Music", serif;
+}
+
+#shop-logo-section {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+#logo2 {
+  width: 55px;
+  height: 55px;
+}
+
+#hplogo {
+  width: 50px;
+  height: 50px;
+}
+
+#logo-separator {
+  width: 1px;
+  height: 55px;
+  background-color: black;
+  margin-right: 10px;
+  transform: rotate(30deg);
+}
+
+.shop-category {
+  font-weight: 100;
+  font-size: 18px;
+  margin: 20px 30px;
+}
+
+#category-name {
+  font-size: 32px;
+  font-weight: 100;
+}
+
+#filter-and-num-of-itms {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 950px;
+}
+
+#filter-div {
+  display: flex;
+  align-items: center;
+}
+
+#filter-and-sort {
+  font-size: 20px;
+}
+
+.product-img {
+  width: 300px;
+  height: 413px;
+}
+
+.product-description {
+  max-width: 300px;
+  font-size: 20px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 20px;
+}
+
+#price-and-counter {
+  max-width: 300px;
+}
+
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  gap: 50px;
+}
+
+.products-counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#price-and-counter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.minus-icon {
+  margin-right: 5px;
+}
