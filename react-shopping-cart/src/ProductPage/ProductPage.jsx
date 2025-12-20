@@ -7,7 +7,6 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 const ProductPage = () => {
   const { id } = useParams();
   const productId = Number(id);
-  console.log(productId);
   const [product, setProduct] = useState(null);
   const {
     productCounter = {},

@@ -1,20 +1,35 @@
 import "./App.css";
 import { Outlet } from "react-router";
 import Navbar from "./Navbar/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
-  const [basketCounter, setBasketCounter] = useState(0);
+  const [products, setProducts] = useState([]);
   const [productCounter, setProductCounter] = useState({});
+  const [cart, setCart] = useState({});
+  const [basketCounter, setBasketCounter] = useState(0);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, [setProducts]);
+
   return (
     <>
       <Navbar basketCounter={basketCounter} />
       <Outlet
         context={{
-          basketCounter,
-          setBasketCounter,
+          products,
+          setProducts,
           productCounter,
           setProductCounter,
+          cart,
+          setCart,
+          basketCounter,
+          setBasketCounter,
         }}
       />
     </>

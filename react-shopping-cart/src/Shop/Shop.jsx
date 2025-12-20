@@ -3,34 +3,30 @@ import logo2 from "../assets/sf_logo2.svg";
 import hplogo from "../assets/hp.svg";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FilterVerticalIcon } from "@hugeicons/core-free-icons";
-import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router";
 import { Link } from "react-router";
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
   const {
+    products,
     productCounter = {},
     setProductCounter,
+    setCart,
     setBasketCounter,
   } = useOutletContext();
   const quantities = [0, 1, 2, 3, 4, 5];
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
-
   const addToBasket = (productId) => {
     const quantity = productCounter[productId] ?? 0;
     if (quantity > 0) {
-      setBasketCounter((prev) => prev + quantity);
+      setCart((prev) => ({
+        ...prev,
+        [productId]: (prev[productId] ?? 0) + quantity,
+      }));
       setProductCounter((prev) => ({ ...prev, [productId]: 0 }));
+      setBasketCounter((prev) => prev + quantity);
     }
   };
 
