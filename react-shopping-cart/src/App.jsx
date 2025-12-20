@@ -5,10 +5,18 @@ import { useState } from "react";
 
 const App = () => {
   const [basketCounter, setBasketCounter] = useState(0);
+  const [productCounter, setProductCounter] = useState({});
   return (
     <>
       <Navbar basketCounter={basketCounter} />
-      <Outlet context={{ basketCounter, setBasketCounter }} />
+      <Outlet
+        context={{
+          basketCounter,
+          setBasketCounter,
+          productCounter,
+          setProductCounter,
+        }}
+      />
     </>
   );
 };

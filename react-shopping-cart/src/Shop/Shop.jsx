@@ -5,23 +5,34 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { FilterVerticalIcon } from "@hugeicons/core-free-icons";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faMinus,
-  faBasketShopping,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router";
+import { Link } from "react-router";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [productCounter, setProductCounter] = useState({});
-  const { setBasketCounter } = useOutletContext();
+  const {
+    productCounter = {},
+    setProductCounter,
+    setBasketCounter,
+  } = useOutletContext();
+  const quantities = [0, 1, 2, 3, 4, 5];
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
-      .then((data) => setProducts(data));
+      .then((data) => {
+        setProducts(data);
+      });
   }, []);
+
+  const addToBasket = (productId) => {
+    const quantity = productCounter[productId] ?? 0;
+    if (quantity > 0) {
+      setBasketCounter((prev) => prev + quantity);
+      setProductCounter((prev) => ({ ...prev, [productId]: 0 }));
+    }
+  };
 
   return (
     <>
@@ -50,61 +61,44 @@ const Shop = () => {
             </i>
             <p id="filter-and-sort">FILTER & SORT</p>
           </div>
-          <p id="num-of-products">9 ITEMS</p>
+          <p id="num-of-products">{products.length} ITEMS</p>
         </section>
         <section id="products-section">
           <ul id="product-list">
             {products.map((product) => (
-              <li key={product.id}>
-                <img
-                  src={product.image}
-                  alt="product image"
-                  className="product-img"
-                />
-                <p className="product-description">{product.title}</p>
+              <li key={product.id} className="product-li">
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.image}
+                    alt="product image"
+                    className="product-img"
+                  />
+                  <p className="product-description">{product.title}</p>
+                </Link>
                 <div id="price-and-counter">
                   <p className="product-price">£{product.price}</p>
-                  <div className="products-counter">
-                    <i
-                      onClick={() =>
+                  <div id="select-and-basket">
+                    <select
+                      name="numOfProducts"
+                      id="num-of-products"
+                      value={productCounter[product.id] ?? 0}
+                      onChange={(e) =>
                         setProductCounter((prev) => ({
                           ...prev,
-                          [product.id]: Math.max(
-                            (prev[product.id] || 0) - 1,
-                            0
-                          ),
-                        }))
-                      }
-                      className="minus-icon"
-                    >
-                      <FontAwesomeIcon icon={faMinus} />
-                    </i>
-                    <p>{productCounter[product.id] || 0}</p>
-                    <i
-                      onClick={() =>
-                        setProductCounter((prev) => ({
-                          ...prev,
-                          [product.id]: (prev[product.id] || 0) + 1,
+                          [product.id]: Number(e.target.value),
                         }))
                       }
                     >
-                      <FontAwesomeIcon icon={faPlus} />
+                      {quantities.map((n) => (
+                        <option key={n} value={n}>
+                          {n}
+                        </option>
+                      ))}
+                    </select>
+                    <i onClick={() => addToBasket(product.id)}>
+                      <FontAwesomeIcon icon={faBasketShopping} />
                     </i>
                   </div>
-                  <i
-                    onClick={() => {
-                      const quantity = productCounter[product.id] || 0;
-                      if (quantity > 0) {
-                        setBasketCounter((prev) => prev + quantity);
-                        setProductCounter((prev) => ({
-                          ...prev,
-                          [product.id]: 0,
-                        }));
-                      }
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faBasketShopping} />
-                  </i>
                 </div>
               </li>
             ))}

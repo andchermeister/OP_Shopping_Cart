@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Noto+Music&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+#cart-section {
+  margin: 0 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Newsreader", serif;
+  font-weight: 500;
+}
+
+.prod-img {
+  width: 250px;
+  height: 330px;
+}
+
+.cart-row {
+  display: grid;
+  max-width: 915px;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
+
+.product-title {
+  max-width: 228px;
+}
+
+.products-counter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#order-summary {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+  width: 400px;
+  height: 400px;
+  box-sizing: border-box;
+  background-color: #f4f2f2;
+  padding: 0 50px;
+}
+
+.summary-flex-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.shipping {
+  border-bottom: 1px solid #000000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+#checkout-btn {
+  align-self: center;
+  width: 200px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+  font-size: 15px;
+}
