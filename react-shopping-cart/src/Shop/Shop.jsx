@@ -15,11 +15,13 @@ const Shop = () => {
     setProductCounter,
     setCart,
     setBasketCounter,
+    setOrderTotal,
   } = useOutletContext();
   const quantities = [0, 1, 2, 3, 4, 5];
 
-  const addToBasket = (productId) => {
+  const addToBasket = (productId, productPrice) => {
     const quantity = productCounter[productId] ?? 0;
+    const priceToAdd = quantity * productPrice;
     if (quantity > 0) {
       setCart((prev) => ({
         ...prev,
@@ -27,6 +29,7 @@ const Shop = () => {
       }));
       setProductCounter((prev) => ({ ...prev, [productId]: 0 }));
       setBasketCounter((prev) => prev + quantity);
+      setOrderTotal((prev) => prev + priceToAdd);
     }
   };
 
@@ -91,7 +94,7 @@ const Shop = () => {
                         </option>
                       ))}
                     </select>
-                    <i onClick={() => addToBasket(product.id)}>
+                    <i onClick={() => addToBasket(product.id, product.price)}>
                       <FontAwesomeIcon icon={faBasketShopping} />
                     </i>
                   </div>

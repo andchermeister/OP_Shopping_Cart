@@ -8,6 +8,7 @@ const App = () => {
   const [productCounter, setProductCounter] = useState({});
   const [cart, setCart] = useState({});
   const [basketCounter, setBasketCounter] = useState(0);
+  const [orderTotal, setOrderTotal] = useState(0);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -30,6 +31,8 @@ const App = () => {
           setCart,
           basketCounter,
           setBasketCounter,
+          orderTotal,
+          setOrderTotal,
         }}
       />
     </>

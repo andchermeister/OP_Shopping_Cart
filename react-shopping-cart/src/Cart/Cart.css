@@ -73,3 +73,13 @@
   border-radius: 25px;
   font-size: 15px;
 }
+
+.counter-remover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
