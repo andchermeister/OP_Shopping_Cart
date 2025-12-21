@@ -12,8 +12,10 @@ const ProductPage = () => {
     productCounter = {},
     setProductCounter,
     setBasketCounter,
+    setCart,
+    setOrderTotal,
   } = useOutletContext();
-  const currentCount = productCounter[productId] || 0;
+  const currentCount = productCounter[productId] ?? 0;
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -23,6 +25,23 @@ const ProductPage = () => {
 
   if (!product) return <p>Loading...</p>;
 
+  const addToBasket = () => {
+    const currentCount = productCounter[productId] ?? 0;
+    if (currentCount > 0) {
+      const priceToAdd = currentCount * product.price;
+      setCart((prev) => ({
+        ...prev,
+        [productId]: (prev[productId] ?? 0) + currentCount,
+      }));
+      setBasketCounter((prev) => prev + currentCount);
+      setProductCounter((prev) => ({
+        ...prev,
+        [productId]: 0,
+      }));
+      setOrderTotal((prev) => prev + priceToAdd);
+    }
+  };
+
   return (
     <div>
       <img src={product.image} alt="product image" id="product-image" />
@@ -31,7 +50,7 @@ const ProductPage = () => {
       <select
         name="numOfProducts"
         id="num-of-products"
-        value={productCounter[productId] ?? 0}
+        value={currentCount}
         onChange={(e) => {
           const newCount = Number(e.target.value);
           setProductCounter((prev) => ({
@@ -46,17 +65,7 @@ const ProductPage = () => {
           </option>
         ))}
       </select>
-      <i
-        onClick={() => {
-          if (currentCount > 0) {
-            setBasketCounter((prev) => prev + currentCount);
-            setProductCounter((prev) => ({
-              ...prev,
-              [productId]: 0,
-            }));
-          }
-        }}
-      >
+      <i onClick={() => addToBasket()}>
         <FontAwesomeIcon icon={faBasketShopping} />
       </i>
     </div>

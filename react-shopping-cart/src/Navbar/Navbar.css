@@ -18,6 +18,7 @@
 #logo-section {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 20px;
   font-size: 12px;
 }
@@ -61,11 +62,6 @@ li {
 
 #qty-bubble.visible {
   opacity: 1;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: inherit;
 }
 
 .nav-link:hover {

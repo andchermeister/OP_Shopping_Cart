@@ -2,6 +2,7 @@ import "./Cart.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router";
+import { Link } from "react-router";
 
 const Cart = () => {
   const {
@@ -74,15 +75,19 @@ const Cart = () => {
             const taxPrice = Math.round(product.price * 0.18 * 100) / 100;
             return (
               <div key={product.id} className="cart-name">
-                <img
-                  src={product.image}
-                  alt="product-img"
-                  className="prod-img"
-                />
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.image}
+                    alt="product-img"
+                    className="prod-img"
+                  />
+                </Link>
                 <ul className="cart-row">
-                  <li>
-                    <p className="product-title">{product.title}</p>
-                  </li>
+                  <Link to={`/product/${product.id}`} className="link-no-decor">
+                    <li>
+                      <p className="product-title">{product.title}</p>
+                    </li>
+                  </Link>
                   <li>£{unitPrice}</li>
                   <li>£{taxPrice}</li>
                   <li>£{totalSumOfItem}</li>
