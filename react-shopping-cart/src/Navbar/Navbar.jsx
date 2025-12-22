@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
+import PropTypes from "prop-types";
 
 const Navbar = ({ basketCounter }) => {
   return (
@@ -47,6 +48,10 @@ const Navbar = ({ basketCounter }) => {
       </nav>
     </>
   );
+};
+
+Navbar.propTypes = {
+  basketCounter: PropTypes.number,
 };
 
 export default Navbar;

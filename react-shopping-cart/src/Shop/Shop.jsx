@@ -13,25 +13,9 @@ const Shop = () => {
     products,
     productCounter = {},
     setProductCounter,
-    setCart,
-    setBasketCounter,
-    setOrderTotal,
+    addToCart,
   } = useOutletContext();
   const quantities = [0, 1, 2, 3, 4, 5];
-
-  const addToBasket = (productId, productPrice) => {
-    const quantity = productCounter[productId] ?? 0;
-    const priceToAdd = quantity * productPrice;
-    if (quantity > 0) {
-      setCart((prev) => ({
-        ...prev,
-        [productId]: (prev[productId] ?? 0) + quantity,
-      }));
-      setProductCounter((prev) => ({ ...prev, [productId]: 0 }));
-      setBasketCounter((prev) => prev + quantity);
-      setOrderTotal((prev) => prev + priceToAdd);
-    }
-  };
 
   return (
     <>
@@ -69,7 +53,7 @@ const Shop = () => {
                 <Link to={`/product/${product.id}`} className="link-no-decor">
                   <img
                     src={product.image}
-                    alt="product image"
+                    alt="product-image"
                     className="product-img"
                   />
                   <p className="product-description">{product.title}</p>
@@ -79,7 +63,8 @@ const Shop = () => {
                   <div id="select-and-basket">
                     <select
                       name="numOfProducts"
-                      id="num-of-products"
+                      className="num-of-products"
+                      id={product.id}
                       value={productCounter[product.id] ?? 0}
                       onChange={(e) =>
                         setProductCounter((prev) => ({
@@ -94,7 +79,16 @@ const Shop = () => {
                         </option>
                       ))}
                     </select>
-                    <i onClick={() => addToBasket(product.id, product.price)}>
+                    <i
+                      onClick={() => {
+                        const quantity = productCounter[product.id] ?? 0;
+                        addToCart(product.id, quantity, product.price);
+                        setProductCounter((prev) => ({
+                          ...prev,
+                          [product.id]: 0,
+                        }));
+                      }}
+                    >
                       <FontAwesomeIcon icon={faBasketShopping} />
                     </i>
                   </div>

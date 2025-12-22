@@ -1,5 +1,4 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
@@ -7,49 +6,32 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 const ProductPage = () => {
   const { id } = useParams();
   const productId = Number(id);
-  const [product, setProduct] = useState(null);
   const {
+    products,
     productCounter = {},
     setProductCounter,
-    setBasketCounter,
-    setCart,
-    setOrderTotal,
+    addToCart,
   } = useOutletContext();
+  const product = products.find((p) => p.id === productId);
   const currentCount = productCounter[productId] ?? 0;
-
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data));
-  }, [id]);
 
   if (!product) return <p>Loading...</p>;
 
   const addToBasket = () => {
     const currentCount = productCounter[productId] ?? 0;
-    if (currentCount > 0) {
-      const priceToAdd = currentCount * product.price;
-      setCart((prev) => ({
-        ...prev,
-        [productId]: (prev[productId] ?? 0) + currentCount,
-      }));
-      setBasketCounter((prev) => prev + currentCount);
-      setProductCounter((prev) => ({
-        ...prev,
-        [productId]: 0,
-      }));
-      setOrderTotal((prev) => prev + priceToAdd);
-    }
+    addToCart(productId, currentCount, product.price);
+    setProductCounter((prev) => ({ ...prev, [productId]: 0 }));
   };
 
   return (
     <div>
-      <img src={product.image} alt="product image" id="product-image" />
+      <img src={product.image} alt="product-image" id="product-image" />
       <p id="product-description">{product.title}</p>
       <p className="product-price">£{product.price}</p>
       <select
         name="numOfProducts"
-        id="num-of-products"
+        className="num-of-products"
+        id={product.id}
         value={currentCount}
         onChange={(e) => {
           const newCount = Number(e.target.value);

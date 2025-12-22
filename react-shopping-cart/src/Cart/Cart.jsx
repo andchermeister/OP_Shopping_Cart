@@ -12,42 +12,15 @@ const Cart = () => {
     setBasketCounter,
     orderTotal,
     setOrderTotal,
+    addToCart,
+    removeFromCart,
+    deleteFromCart,
   } = useOutletContext();
   const cartItems = products.filter((p) => (cart[p.id] ?? 0) > 0);
   const totalQuantity = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
   const basketPrice = Math.round(orderTotal * 100) / 100;
   const shippingCost = basketPrice > 0 ? 10 : 0;
   const orderTotalWithShipping = basketPrice + shippingCost;
-
-  const addItem = (productId, productPrice) => {
-    `productPrice: ${productPrice}`;
-    setCart((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] ?? 0) + 1,
-    }));
-    setBasketCounter((prev) => prev + 1);
-    setOrderTotal((prev) => prev + productPrice);
-  };
-
-  const removeItem = (productId, productPrice) => {
-    setCart((prev) => ({
-      ...prev,
-      [productId]: Math.max((prev[productId] ?? 0) - 1, 0),
-    }));
-    setBasketCounter((prev) => Math.max(prev - 1, 0));
-    setOrderTotal((prev) => Math.max(prev - productPrice, 0));
-  };
-
-  const deleteItem = (productId, productPrice) => {
-    const quantityToRemove = cart[productId] ?? 0;
-    const priceToRemove = quantityToRemove * productPrice;
-    setCart((prev) => {
-      const { [productId]: _, ...rest } = prev;
-      return rest;
-    });
-    setBasketCounter((prev) => Math.max(prev - quantityToRemove, 0));
-    setOrderTotal((prev) => Math.max(prev - priceToRemove, 0));
-  };
 
   const checkout = () => {
     if (totalQuantity === 0) return;
@@ -95,16 +68,22 @@ const Cart = () => {
                 <div className="counter-remover">
                   <div className="products-counter">
                     Quantity
-                    <i onClick={() => removeItem(product.id, product.price)}>
+                    <i
+                      onClick={() =>
+                        removeFromCart(product.id, 1, product.price)
+                      }
+                    >
                       <FontAwesomeIcon icon={faMinus} />
                     </i>
                     <p>{quantityOfItem}</p>
-                    <i onClick={() => addItem(product.id, product.price)}>
+                    <i onClick={() => addToCart(product.id, 1, product.price)}>
                       <FontAwesomeIcon icon={faPlus} />
                     </i>
                   </div>
                   <div className="products-remover">
-                    <i onClick={() => deleteItem(product.id, product.price)}>
+                    <i
+                      onClick={() => deleteFromCart(product.id, product.price)}
+                    >
                       <FontAwesomeIcon icon={faXmark} />
                     </i>
                   </div>
